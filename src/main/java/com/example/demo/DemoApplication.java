@@ -22,6 +22,11 @@ import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.*;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -43,56 +48,13 @@ public class DemoApplication {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
 
+            Dog dog=new Dog("Jjaerong","19");
 
-//            Dog upserted = mongoTemplate.update(Dog.class)
-//                    .matching(new Query(Criteria.where("name").is("jjaerong")))
-////                    .matching(new Query(Criteria.where("name").is("jjaerong")).with(Sort.by(Sort.Direction.DESC,"age")))
-//                    .apply(new Update())
-//                    .withOptions(
-//                            FindAndModifyOptions.options().upsert(true).returnNew(true))
-//                    .findAndModifyValue();
-
-//
-            Dog dog=new Dog("ari","10");
             mongoTemplate.insert(dog);
-
-//            Optional<Dog> upserted = mongoTemplate.update(Dog.class)// _class를 저장안해서 안될거라고 생각함 // 결과 : 되네 -_-
-//                    .matching(new Query(where("name").is("ari")).with(Sort.by(Sort.Direction.DESC, "age")))
-//                    .apply(new Update().set("age", "110"))
-//                    .withOptions(FindAndModifyOptions.options().upsert(true).returnNew(true))
-//                    .findAndModify();
-
-//            mongoTemplate.query(Person.class)
-//                    .matching(
-//                            Query.query(
-//                                    Criteria.where("name").is("david").and("accounts.balance").gt(2000))
-//                    ).first().get();
-
-            var result = mongoTemplate.query(Dog.class)
-                    .distinct("name").all();
-
-            for (Object o : result) {
-                System.out.println(o);
-            }
 
         };
     }
 
-    @Document("person")
-    static class Person {
-        String id, age, name;
 
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "id='" + id + '\'' +
-                    ", age='" + age + '\'' +
-                    ", name='" + name + '\'' +
-                    '}';
-        }
-    }
 
-    static class TypeMapper extends DefaultMongoTypeMapper {
-
-    }
 }
