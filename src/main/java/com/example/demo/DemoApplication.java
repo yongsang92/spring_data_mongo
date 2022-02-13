@@ -1,6 +1,7 @@
 package com.example.demo;
 
 //import com.example.demo.MongoConfiguration.MongoConfig;
+
 import com.example.demo.model.Dog;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
@@ -29,7 +30,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -45,7 +48,8 @@ public class DemoApplication {
     @Autowired
     MongoTemplate mongoTemplate;
 
-
+    @Autowired
+    MongoTemplate asd;
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
@@ -69,18 +73,17 @@ public class DemoApplication {
 //
 
 
-            System.out.println("Collection lists: " + mongoTemplate.getCollectionNames());
-            var db = mongoTemplate.getDb();
-            System.out.println(
-                    "MongoTemplate Info : "
-                            + db.getWriteConcern()
-                            +"\n"
-                            + db.getReadConcern().getLevel()
-            );
 
-//            System.out.println(
-//                    mongoTemplate.findOne(new Query(Criteria.where("name").is("Elizabeth Ray")), Object.class, "customers")
-//            );
+//
+//
+//            System.out.println("Collection lists: " + mongoTemplate.getCollectionNames());
+//            var db = mongoTemplate.getDb();
+//            System.out.println("MongoTemplate Info : " + db.getWriteConcern());
+//            mongoTemplate.insert(new Dog("MilK","10"));
+            asd.insert(new Dog("MilK","10"));
+
+
+
 
         };
     }

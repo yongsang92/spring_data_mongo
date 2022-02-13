@@ -1,11 +1,15 @@
 package com.example.demo.MongoConfiguration;
 
+import com.mongodb.ReadConcern;
+import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 
 /*
@@ -14,16 +18,24 @@ import org.springframework.data.mongodb.core.MongoTemplate;
  */
 @Configuration
 public class MongoConfigforEachTemplateSettings {
+
+    @Value("${spring.data.mongodb.uri}")
+    private String mongodbURI;
+
+    @Value("${spring.data.mongodb.database}")
+    private String database;
+
     @Bean
     public MongoClient mongoClient() {
-        final String mongodbURI = "mongodb+srv://asd:asd@mflix.kazzu.mongodb.net";
         return MongoClients.create(mongodbURI);
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() {
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), "sample_analytics");
+    public MongoTemplate asd() {
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), database);
+        mongoTemplate.setWriteConcern(new WriteConcern(0, -10));
         mongoTemplate.setWriteConcern(WriteConcern.MAJORITY);
+
         return mongoTemplate;
     }
 }

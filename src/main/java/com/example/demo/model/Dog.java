@@ -4,7 +4,7 @@ package com.example.demo.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document("dog")
+@Document("customer")
 public class Dog {
 
     String id,age;

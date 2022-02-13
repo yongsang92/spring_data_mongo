@@ -1,0 +1,10 @@
+server.port : 9080
+
+# TODO TODAY : application ???? ??? ???? ? ????
+spring:
+  data:
+    mongodb:
+#      uri : mongodb+srv://asd:asd@mflix.kazzu.mongodb.net/?w=3&wTimeout=10
+      uri : mongodb+srv://asd:asd@mflix.kazzu.mongodb.net
+      database: sample_analytics
+
