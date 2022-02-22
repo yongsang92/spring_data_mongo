@@ -4,29 +4,22 @@ package com.example.demo.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document("customer")
-public class Dog {
+@Document("Animal")
+public class Dog extends Animal {
 
-    String id,age;
-    @Field("name_is")
-    String name;
+    String sound;
+
 
     public Dog(String name, String age) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
+        sound = "mung mung";
     }
-    public Dog(){
-
-    }
-
 
     @Override
     public String toString() {
         return "Dog{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", age='" + age + '\'' +
+                "sound='" + sound + '\'' +
                 '}';
     }
-
 }

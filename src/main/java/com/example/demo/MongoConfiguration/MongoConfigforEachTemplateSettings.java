@@ -31,9 +31,9 @@ public class MongoConfigforEachTemplateSettings {
     }
 
     @Bean
-    public MongoTemplate asd() {
+    public MongoTemplate mongoTemplate2() {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), database);
-        mongoTemplate.setWriteConcern(new WriteConcern(0, -10));
+        mongoTemplate.setWriteConcern(new WriteConcern(0, 10));
         mongoTemplate.setWriteConcern(WriteConcern.MAJORITY);
 
         return mongoTemplate;

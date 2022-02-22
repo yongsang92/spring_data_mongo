@@ -2,7 +2,9 @@ package com.example.demo;
 
 //import com.example.demo.MongoConfiguration.MongoConfig;
 
+import com.example.demo.model.Cat;
 import com.example.demo.model.Dog;
+import com.example.demo.model.Zoo;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -23,6 +25,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.query.*;
 
 import javax.servlet.ServletException;
@@ -49,44 +52,29 @@ public class DemoApplication {
     MongoTemplate mongoTemplate;
 
     @Autowired
-    MongoTemplate asd;
+    MongoOperations mongoTemplate2;
+
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
 
 
-//            final String mongodbURI = "mongodb+srv://asd:asd@mflix.kazzu.mongodb.net/sample_airbnb?retryWrites=true&w=majority";
-//
-//            MongoClient client = MongoClients.create(mongodbURI);
-//
-//            MongoCollection collection = client.getDatabase("sample_airbnb").getCollection("listingsAndReviews");
-//
-//
-//            System.out.println("!!!!!!!!!!!!!!" +
-//                    collection.find().projection(Projections.include("name")).first()
-//            );
+//            Dog dog=new Dog("Pepper","11");
+//            mongoTemplate2.save(dog);
+//            Cat cat=new Cat("Nilla","12");
+//            mongoTemplate2.save(cat);
+//            데이터 셋
 
-//            System.out.println(
-//                    "?"+factory.getMongoDatabase().getReadConcern().getLevel()
-//            );
-//            // readConcern은 스프링에서 설정할 수 있다
-//
+//            Query query = new Query();
+//            query.addCriteria(Criteria.where("age").is("11"));
+//            Update update = new Update();
+//            update.set("age", "12");
+//            var result=mongoTemplate2.update(Cat.class).matching(query).apply(update).first();
+//            System.out.println(result);
 
-
-
-//
-//
-//            System.out.println("Collection lists: " + mongoTemplate.getCollectionNames());
-//            var db = mongoTemplate.getDb();
-//            System.out.println("MongoTemplate Info : " + db.getWriteConcern());
-//            mongoTemplate.insert(new Dog("MilK","10"));
-            asd.insert(new Dog("MilK","10"));
-
-
-
-
+            for(var animal:mongoTemplate2.findAll(Cat.class)){
+                System.out.println(animal);
+            }
         };
     }
-
-
 }
